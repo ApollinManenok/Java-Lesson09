@@ -10,12 +10,11 @@ public class Registry implements Iterable<Patient> {
 
     public Registry() {
         this.patients = new TreeSet<Patient>();
-    }
+    }//Add reading from local file CHANGE to HashSet
 
     public void addPatient(Patient patient) {
         patients.add(patient);
-    }
-
+    }// Add change status
 
     @Override
     public String toString() {

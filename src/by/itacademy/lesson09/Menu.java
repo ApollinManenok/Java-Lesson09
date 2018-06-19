@@ -21,8 +21,8 @@ public class Menu {
         //operations.get(0).operation(registry);
         //operations.get(0).operation(registry);
         //System.out.println(registry);
-        operations.get(1).operation(registry);
+        //operations.get(1).operation(registry);
         //System.out.println(registry);
-        //operations.get(2).operation(registry);
+        operations.get(2).operation(registry);
     }
 }

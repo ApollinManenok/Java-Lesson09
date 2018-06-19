@@ -1,17 +1,19 @@
 package by.itacademy.lesson09;
 
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class OutputLocalFile implements Operable {
     private DataOutputStream dos;
+    private File local = new File("data1.bin");
 
     @Override
     public void operation(Registry registry) {
         try {
-            dos = new DataOutputStream(new FileOutputStream("data.bin"));
+            dos = new DataOutputStream(new FileOutputStream(local));
             for (Patient element : registry) {
                 write(element);
             }

@@ -1,5 +1,6 @@
 package by.itacademy.lesson09;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -16,6 +17,7 @@ public class Patient implements Comparable<Patient> {
         this.surname = surname;
         this.birth = birth;
         this.status = status;
+
     }
 
     public String getName() {
