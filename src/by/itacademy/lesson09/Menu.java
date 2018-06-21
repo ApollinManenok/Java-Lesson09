@@ -1,5 +1,17 @@
 package by.itacademy.lesson09;
 
+import by.itacademy.lesson09.inputable.Insert;
+import by.itacademy.lesson09.inputable.IntegerInput;
+import by.itacademy.lesson09.operable.*;
+import by.itacademy.lesson09.operable.console.ConsoleAddPatient;
+import by.itacademy.lesson09.operable.console.PrintPatients;
+import by.itacademy.lesson09.operable.iostream.ReadLocalFile;
+import by.itacademy.lesson09.operable.iostream.WriteLocalFile;
+import by.itacademy.lesson09.operable.xml.ReadRemoteXML;
+import by.itacademy.lesson09.operable.iostream.ReadURL;
+import by.itacademy.lesson09.operable.xml.ReadLocalXML;
+import by.itacademy.lesson09.operable.xml.WriteLocalXML;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.logging.Level;

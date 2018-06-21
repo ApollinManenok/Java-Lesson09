@@ -1,4 +1,6 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.operable;
+
+import by.itacademy.lesson09.Registry;
 
 public abstract class BaseRegistryOperation implements Operable {
     protected Registry registry;

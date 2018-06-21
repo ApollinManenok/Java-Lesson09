@@ -1,4 +1,4 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.operable;
 
 public interface Operable {
     void operation();

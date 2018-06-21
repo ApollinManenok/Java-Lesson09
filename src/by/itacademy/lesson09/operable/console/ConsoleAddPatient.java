@@ -1,4 +1,12 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.operable.console;
+
+import by.itacademy.lesson09.inputable.Insert;
+import by.itacademy.lesson09.Patient;
+import by.itacademy.lesson09.Registry;
+import by.itacademy.lesson09.inputable.BoolInput;
+import by.itacademy.lesson09.inputable.DateInput;
+import by.itacademy.lesson09.inputable.StringInput;
+import by.itacademy.lesson09.operable.BaseRegistryOperation;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

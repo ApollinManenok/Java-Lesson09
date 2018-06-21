@@ -1,4 +1,6 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.inputable;
+
+import by.itacademy.lesson09.Patient;
 
 import java.time.LocalDate;
 import java.util.Scanner;

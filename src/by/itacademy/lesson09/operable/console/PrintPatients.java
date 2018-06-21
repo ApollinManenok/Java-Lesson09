@@ -1,4 +1,8 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.operable.console;
+
+import by.itacademy.lesson09.Patient;
+import by.itacademy.lesson09.Registry;
+import by.itacademy.lesson09.operable.BaseRegistryOperation;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;

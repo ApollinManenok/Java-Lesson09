@@ -1,7 +1,10 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.operable.xml;
 
+import by.itacademy.lesson09.Patient;
+import by.itacademy.lesson09.Registry;
+import by.itacademy.lesson09.operable.BaseRegistryOperation;
+import by.itacademy.lesson09.operable.iostream.WriteLocalFile;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,23 +37,12 @@ public class WriteLocalXML extends BaseRegistryOperation {
             Node root = document.createElement("Registry");
             document.appendChild(root);
             for (Patient element : registry) {
-                root.appendChild(createPatient(element.getProperties()));
+                root.appendChild(new ElementPatient(document).create(element.getProperties()));
             }
             writeDoc();
         } catch (ParserConfigurationException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
-    }
-
-    private Element createPatient(String[] properties) {
-        Element patient = document.createElement("Patient");
-        Element[] elements = {document.createElement("Name"), document.createElement("Surname"),
-                document.createElement("Birth"), document.createElement("Status")};
-        for (int i = 0; i < elements.length; i++) {
-            elements[i].setTextContent(properties[i]);
-            patient.appendChild(elements[i]);
-        }
-        return patient;
     }
 
     private void writeDoc() {

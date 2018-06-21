@@ -1,5 +1,8 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.operable.xml;
 
+import by.itacademy.lesson09.Patient;
+import by.itacademy.lesson09.Registry;
+import by.itacademy.lesson09.operable.BaseRegistryOperation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
