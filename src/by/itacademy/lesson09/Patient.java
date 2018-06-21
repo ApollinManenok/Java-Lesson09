@@ -1,12 +1,12 @@
 package by.itacademy.lesson09;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 
-public class Patient implements Comparable<Patient> {
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+public class Patient {
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
     private String name;
     private String surname;
     private LocalDate birth;
@@ -17,7 +17,22 @@ public class Patient implements Comparable<Patient> {
         this.surname = surname;
         this.birth = birth;
         this.status = status;
+    }
 
+    public Patient(String line) throws DateTimeParseException, InputMismatchException {
+        this(line.split(";"));
+    }
+
+    public Patient(String[] fields) throws DateTimeParseException, InputMismatchException {
+        this(fields[0], fields[1], fields[2], fields[3]);
+    }
+
+    public Patient(String name, String surname, String birthStr, String statusStr) throws DateTimeParseException, InputMismatchException {
+        this(name, surname, LocalDate.parse(birthStr, Patient.formatter), statusStr);
+    }
+
+    public Patient(String name, String surname, LocalDate birth, String statusStr) throws InputMismatchException {
+        this(name, surname, birth, Boolean.valueOf(statusStr));
     }
 
     public String getName() {
@@ -36,26 +51,32 @@ public class Patient implements Comparable<Patient> {
         return status;
     }
 
+    public String[] getProperties() {
+        String[] properties = {name, surname, birth.format(formatter), String.valueOf(status)};
+        return properties;
+    }
+
     @Override
-    public int compareTo(Patient another) {
-        int result = name.compareTo(another.name);
-        if (result != 0) {
-            return result;
-        }
-        result = surname.compareTo(another.surname);
-        if (result != 0) {
-            return result;
-        }
-        return birth.compareTo(another.birth);
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Patient patient = (Patient) other;
+        if (!name.equals(patient.name)) return false;
+        if (!surname.equals(patient.surname)) return false;
+        return birth.equals(patient.birth);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + surname.hashCode();
+        result = 31 * result + birth.hashCode();
+        return result;
     }
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birth=" + birth +
-                ", status=" + status +
-                '}';
+        return "Patient: " + name + " " + surname + " Date of birth: "
+                + birth.format(formatter) + ", Status: " + status + ";";
     }
 }

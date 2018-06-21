@@ -1,14 +1,14 @@
 package by.itacademy.lesson09;
 
 public class Insert<T> {
-    private Inputable<T> info;
+    private Inputable<T> inputType;
 
-    public Insert(Inputable<T> type) {
-        this.info = type;
+    public Insert(Inputable<T> inputType) {
+        this.inputType = inputType;
     }
 
     public T get(String str) {
         System.out.print(str + "\n>>> ");
-        return info.input();
+        return inputType.input();
     }
 }

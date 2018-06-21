@@ -1,28 +1,53 @@
 package by.itacademy.lesson09;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Menu {
+    private static final Logger LOGGER = Logger.getLogger(Menu.class.getName());
     private ArrayList<Operable> operations = new ArrayList<>();
+    private Registry registry = new Registry();
+    private String sourceURL = "https://raw.githubusercontent.com/PManenok/Java-Lesson09-Text/master/Registry.txt";
+    private String remoteXML = "https://raw.githubusercontent.com/PManenok/Java-Lesson09-Text/master/Patients.xml";
+    private String localFile = "data.bin";
+    private String localXML = "patients.xml";
 
     {
-        operations.add(new AddingPatient());
-        operations.add(new AddFromUrl()); //add from Url
-        operations.add(new OutputLocalFile()); //save to local file
-    }
-
-    private Registry registry;
-
-    public Menu() {
-        this.registry = new Registry();
+        operations.add(new PrintPatients(registry));
+        operations.add(new ConsoleAddPatient(registry));
+        operations.add(new ReadLocalFile(registry, localFile));//read from local file
+        operations.add(new WriteLocalFile(registry, localFile)); //save to local file
+        operations.add(new ReadURL(registry, sourceURL)); //add from Url
+        operations.add(new ReadLocalXML(registry, localXML));//read from local XML file
+        operations.add(new WriteLocalXML(registry, localXML)); //save to local XML file
+        operations.add(new ReadRemoteXML(registry, remoteXML)); //add from remote XML
     }
 
     public void list() {
-        //operations.get(0).operation(registry);
-        //operations.get(0).operation(registry);
-        //System.out.println(registry);
-        //operations.get(1).operation(registry);
-        //System.out.println(registry);
-        operations.get(2).operation(registry);
+        boolean term = true;
+        while (term) {
+            System.out.println("Registry menu:\n0. Exit");
+            for (int i = 0; i < operations.size(); i++) {
+                System.out.println((i + 1) + ". " + operations.get(i).typo());
+            }
+            try {
+                int index = new Insert<>(new IntegerInput()).get("Enter option number");
+                term = operate(index);
+            } catch (InputMismatchException | RangeException e) {
+                LOGGER.log(Level.WARNING, e.getMessage(), e);
+            }
+        }
+    }
+
+    private boolean operate(int index) throws RangeException {
+        if (index < 0 || index > this.operations.size())
+            throw new RangeException("Option out of list range");
+        else if (index == 0)
+            return false;
+        index -= 1;
+        operations.get(index).operation();
+        return true;
     }
 }
