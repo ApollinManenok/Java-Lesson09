@@ -1,11 +1,10 @@
-package by.itacademy.lesson09.operable.iostream;
+package by.itacademy.lesson09.operable.serialization.io;
 
-import by.itacademy.lesson09.Patient;
-import by.itacademy.lesson09.Registry;
-import by.itacademy.lesson09.operable.BaseRegistryOperation;
+import by.itacademy.lesson09.domain.Patient;
+import by.itacademy.lesson09.domain.Registry;
+import by.itacademy.lesson09.operable.serialization.WritePatients;
 
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,25 +12,23 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WriteLocalFile extends BaseRegistryOperation {
+public class WriteLocalFile extends WritePatients {
     private static final Logger LOGGER = Logger.getLogger(WriteLocalFile.class.getName());
-    private File local;
 
     public WriteLocalFile(Registry registry, String source) {
-        super(registry);
-        local = new File(source);
+        super(registry, source);
     }
 
     @Override
     public void operation() {
-        try (DataOutputStream writeLocalFile = new DataOutputStream(new FileOutputStream(local))) {
+        try (DataOutputStream writeLocalFile = new DataOutputStream(new FileOutputStream(file))) {
             for (Patient element : registry) {
                 writeLocalFile.writeUTF(makeStr(element));
             }
         } catch (FileNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "Can't find file " + local, e);
+            LOGGER.log(Level.SEVERE, "Can't find file " + file, e);
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Can't write to file " + local, e);
+            LOGGER.log(Level.SEVERE, "Can't write to file " + file, e);
         }
     }
 

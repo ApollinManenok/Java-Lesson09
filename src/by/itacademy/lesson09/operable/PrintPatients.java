@@ -1,8 +1,7 @@
-package by.itacademy.lesson09.operable.console;
+package by.itacademy.lesson09.operable;
 
-import by.itacademy.lesson09.Patient;
-import by.itacademy.lesson09.Registry;
-import by.itacademy.lesson09.operable.BaseRegistryOperation;
+import by.itacademy.lesson09.domain.Patient;
+import by.itacademy.lesson09.domain.Registry;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -10,6 +9,7 @@ import java.util.logging.Logger;
 
 public class PrintPatients extends BaseRegistryOperation {
     private static final Logger LOGGER = Logger.getLogger(PrintPatients.class.getName());
+
     public PrintPatients(Registry registry) {
         super(registry);
     }
@@ -24,7 +24,7 @@ public class PrintPatients extends BaseRegistryOperation {
 
     private void waiting() {
         try {
-            TimeUnit.SECONDS.sleep(5); // instead of sleepSec
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             LOGGER.log(Level.INFO, "Something interrupted", e);
         }

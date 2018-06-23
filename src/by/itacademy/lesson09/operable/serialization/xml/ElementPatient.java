@@ -1,10 +1,10 @@
-package by.itacademy.lesson09.operable.xml;
+package by.itacademy.lesson09.operable.serialization.xml;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class ElementPatient {
-    Document doc;
+    private Document doc;
 
     public ElementPatient(Document doc) {
         this.doc = doc;

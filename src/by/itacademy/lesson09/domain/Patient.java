@@ -1,12 +1,10 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.domain;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
 public class Patient {
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
     private String name;
     private String surname;
     private LocalDate birth;
@@ -28,7 +26,7 @@ public class Patient {
     }
 
     public Patient(String name, String surname, String birthStr, String statusStr) throws DateTimeParseException, InputMismatchException {
-        this(name, surname, LocalDate.parse(birthStr, Patient.formatter), statusStr);
+        this(name, surname, LocalDate.parse(birthStr, PatientDateFormat.INSTANCE.format()), statusStr);
     }
 
     public Patient(String name, String surname, LocalDate birth, String statusStr) throws InputMismatchException {
@@ -52,7 +50,7 @@ public class Patient {
     }
 
     public String[] getProperties() {
-        String[] properties = {name, surname, birth.format(formatter), String.valueOf(status)};
+        String[] properties = {name, surname, birth.format(PatientDateFormat.INSTANCE.format()), String.valueOf(status)};
         return properties;
     }
 
@@ -77,6 +75,6 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient: " + name + " " + surname + " Date of birth: "
-                + birth.format(formatter) + ", Status: " + status + ";";
+                + birth.format(PatientDateFormat.INSTANCE.format()) + ", Status: " + status + ";";
     }
 }

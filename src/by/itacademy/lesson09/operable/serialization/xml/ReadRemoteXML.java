@@ -1,10 +1,8 @@
-package by.itacademy.lesson09.operable.xml;
+package by.itacademy.lesson09.operable.serialization.xml;
 
-import by.itacademy.lesson09.Patient;
-import by.itacademy.lesson09.Registry;
-import by.itacademy.lesson09.operable.BaseRegistryOperation;
-import by.itacademy.lesson09.operable.iostream.ReadURL;
-import org.xml.sax.Attributes;
+import by.itacademy.lesson09.domain.Registry;
+import by.itacademy.lesson09.operable.serialization.UploadPatients;
+import by.itacademy.lesson09.operable.serialization.io.ReadURL;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -14,29 +12,25 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ReadRemoteXML extends BaseRegistryOperation {
+public class ReadRemoteXML extends UploadPatients {
     private static final Logger LOGGER = Logger.getLogger(ReadURL.class.getName());
-    private String source;
-    private String[] properties = new String[4];
 
     public ReadRemoteXML(Registry registry, String source) {
-        super(registry);
-        this.source = source;
+        super(registry, source);
     }
 
     @Override
     public void operation() {
-        try {
-            InputStream remote = new BufferedInputStream(new URL(source).openConnection().getInputStream());
+        try (InputStream remote = new BufferedInputStream(url.openConnection().getInputStream())) {
             SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
             DefaultHandler handler = new PatientHandler();
             saxParser.parse(remote, handler);
+            registry.addAll(((PatientHandler) handler).getPatients());
         } catch (SAXException | ParserConfigurationException | IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         } catch (DateTimeParseException | InputMismatchException e) {

@@ -1,16 +1,17 @@
 package by.itacademy.lesson09;
 
+import by.itacademy.lesson09.domain.Registry;
 import by.itacademy.lesson09.inputable.Insert;
 import by.itacademy.lesson09.inputable.IntegerInput;
-import by.itacademy.lesson09.operable.*;
-import by.itacademy.lesson09.operable.console.ConsoleAddPatient;
-import by.itacademy.lesson09.operable.console.PrintPatients;
-import by.itacademy.lesson09.operable.iostream.ReadLocalFile;
-import by.itacademy.lesson09.operable.iostream.WriteLocalFile;
-import by.itacademy.lesson09.operable.xml.ReadRemoteXML;
-import by.itacademy.lesson09.operable.iostream.ReadURL;
-import by.itacademy.lesson09.operable.xml.ReadLocalXML;
-import by.itacademy.lesson09.operable.xml.WriteLocalXML;
+import by.itacademy.lesson09.operable.ConsoleAddPatient;
+import by.itacademy.lesson09.operable.Operable;
+import by.itacademy.lesson09.operable.PrintPatients;
+import by.itacademy.lesson09.operable.serialization.io.ReadLocalFile;
+import by.itacademy.lesson09.operable.serialization.io.ReadURL;
+import by.itacademy.lesson09.operable.serialization.io.WriteLocalFile;
+import by.itacademy.lesson09.operable.serialization.xml.ReadLocalXML;
+import by.itacademy.lesson09.operable.serialization.xml.ReadRemoteXML;
+import by.itacademy.lesson09.operable.serialization.xml.WriteLocalXML;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

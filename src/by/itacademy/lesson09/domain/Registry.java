@@ -1,4 +1,4 @@
-package by.itacademy.lesson09;
+package by.itacademy.lesson09.domain;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,6 +10,11 @@ public class Registry implements Iterable<Patient> {
     public void addPatient(Patient patient) {
         patients.remove(patient);
         patients.add(patient);
+    }
+
+    public void addAll(Set<Patient> newPatients) {
+        patients.removeAll(newPatients);
+        patients.addAll(newPatients);
     }
 
     @Override
